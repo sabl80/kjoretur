@@ -10,6 +10,12 @@ const startKnapp = document.getElementById("start-knapp");
 const fyrverkeriCanvas = document.getElementById("fyrverkeri");
 const ctx = fyrverkeriCanvas.getContext("2d");
 
+const kortSkadeEl = document.getElementById("kort-skade");
+const langSkadeEl = document.getElementById("lang-skade");
+const kortAvstandEl = document.getElementById("kort-avstand");
+const langAvstandEl = document.getElementById("lang-avstand");
+const bilEl = document.getElementById("bil");
+
 fyrverkeriCanvas.width = window.innerWidth;
 fyrverkeriCanvas.height = window.innerHeight;
 
@@ -25,6 +31,18 @@ function startSpill() {
   startSkjerm.classList.add("skjult");
   spill.classList.remove("skjult");
   oppdaterStatus();
+  oppdaterKart();
+  visTilfeldigeVerdier();
+}
+
+function visTilfeldigeVerdier() {
+  // Kort vei = lite stykke, moderat skade
+  kortSkadeEl.textContent = Math.floor(Math.random() * 5) + 1; // 1–5 skade
+  kortAvstandEl.textContent = Math.floor(Math.random() * 16) + 5; // 5–20 km
+
+  // Lang vei = langt stykke, mye skade
+  langSkadeEl.textContent = Math.floor(Math.random() * 8) + 3; // 3–10 skade
+  langAvstandEl.textContent = Math.floor(Math.random() * 21) + 25; // 25–45 km
 }
 
 function kjør(type) {
@@ -34,16 +52,17 @@ function kjør(type) {
   let distanse = 0;
 
   if (type === "kort") {
-    skade = Math.floor(Math.random() * 8) + 3; // 3-10 skade
-    distanse = Math.floor(Math.random() * 60) + 40;
+    skade = parseInt(kortSkadeEl.textContent);
+    distanse = parseInt(kortAvstandEl.textContent);
   } else {
-    skade = Math.floor(Math.random() * 3) + 1; // 1-3 skade
-    distanse = Math.floor(Math.random() * 30) + 20;
+    skade = parseInt(langSkadeEl.textContent);
+    distanse = parseInt(langAvstandEl.textContent);
   }
 
   hp -= skade;
   kjort += distanse;
   avstand -= distanse;
+  oppdaterKart();
 
   if (hp <= 0) {
     hp = 0;
@@ -63,14 +82,20 @@ function kjør(type) {
   }
 
   oppdaterStatus();
+  visTilfeldigeVerdier(); // nye tilfeldige verdier for neste valg
 }
 
 function oppdaterStatus() {
   statusTekst.innerHTML = `
-    🚗 Kjørt: <strong>${kjort}</strong> km / 500 km<br>
+    🚗 Kjørt: <strong>${Math.min(500, kjort)}</strong> km / 500 km<br>
     ❤️ HP igjen: <strong>${hp}</strong><br>
     📏 Avstand igjen: <strong>${Math.max(0, avstand)}</strong> km
   `;
+}
+
+function oppdaterKart() {
+  const prosent = Math.min(100, (kjort / 500) * 100);
+  bilEl.style.left = prosent + "%";
 }
 
 function tilbakeTilStart() {
