@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fra Hus til Hytte</title>
+  <link rel="stylesheet" href="stil.css" />
+</head>
+<body>
+  <div id="spill-container">
+    <h1>Fra Hus til Hytte 🚗</h1>
+
+    <!-- Startskjerm -->
+    <div id="startskjerm">
+      <button id="start-knapp">Start</button>
+    </div>
+
+    <!-- Spillvisning -->
+    <div id="spill" class="skjult">
+      <div id="panel-venstre">
+        <h2>Velg vei</h2>
+        <button id="kort-vei">Kort vei (skade 3–10 HP)</button>
+        <button id="lang-vei">Lang vei (skade 1–3 HP)</button>
+      </div>
+
+      <div id="panel-hoyre">
+        <h2>Status</h2>
+        <p id="status"></p>
+      </div>
+    </div>
+
+    <!-- Fyrverkeri -->
+    <canvas id="fyrverkeri" class="skjult"></canvas>
+  </div>
+
+  <script src="logikk.js"></script>
+</body>
+</html>
