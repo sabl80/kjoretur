@@ -59,16 +59,33 @@ button:hover {
   display: none;
 }
 
-/* Kart */
+/* 🌲 Kart med natur og fjell */
 #kart {
   position: relative;
   width: 100%;
-  height: 100px;
-  background: linear-gradient(to right, #b3e5fc 0%, #fefbd8 100%);
+  height: 140px;
+  background: linear-gradient(to top, #6ab04c 0%, #b8e994 40%, #87ceeb 100%);
   border: 2px solid #333;
   border-radius: 10px;
   margin-top: 20px;
   overflow: hidden;
+  box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Trær og fjell */
+#bakgrunn::before {
+  content: "🌳🌳🌲🌲🌲🌳🌲🌳🌲🌳🌲🌳";
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  font-size: 22px;
+}
+#bakgrunn::after {
+  content: "⛰️⛰️⛰️";
+  position: absolute;
+  top: 0;
+  right: 30px;
+  font-size: 40px;
 }
 
 #hus, #hytte {
@@ -85,11 +102,13 @@ button:hover {
   right: 5px;
 }
 
+/* 🚗 Bilen kjører riktig vei (mot høyre) */
 #bil {
   position: absolute;
   top: 35px;
   left: 0;
-  transition: left 0.5s;
+  transform: scaleX(1); /* peker mot høyre */
+  transition: left 0.5s ease-out;
   font-size: 30px;
 }
 

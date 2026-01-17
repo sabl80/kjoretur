@@ -36,11 +36,8 @@ function startSpill() {
 }
 
 function visTilfeldigeVerdier() {
-  // Kort vei = lite stykke, moderat skade
   kortSkadeEl.textContent = Math.floor(Math.random() * 5) + 1; // 1–5 skade
   kortAvstandEl.textContent = Math.floor(Math.random() * 16) + 5; // 5–20 km
-
-  // Lang vei = langt stykke, mye skade
   langSkadeEl.textContent = Math.floor(Math.random() * 8) + 3; // 3–10 skade
   langAvstandEl.textContent = Math.floor(Math.random() * 21) + 25; // 25–45 km
 }
@@ -62,6 +59,10 @@ function kjør(type) {
   hp -= skade;
   kjort += distanse;
   avstand -= distanse;
+
+  if (kjort > 500) kjort = 500;
+  if (avstand < 0) avstand = 0;
+
   oppdaterKart();
 
   if (hp <= 0) {
@@ -72,7 +73,8 @@ function kjør(type) {
   }
 
   if (avstand <= 0) {
-    statusTekst.innerHTML = `🎉 Du kom fram til hytta! Fyrverkeri starter!`;
+    oppdaterStatus();
+    statusTekst.innerHTML += `<br><strong>🎉 Bra jobba! Du kom deg til hytta!</strong>`;
     startFyrverkeri();
     setTimeout(() => {
       stoppFyrverkeri();
@@ -82,7 +84,7 @@ function kjør(type) {
   }
 
   oppdaterStatus();
-  visTilfeldigeVerdier(); // nye tilfeldige verdier for neste valg
+  visTilfeldigeVerdier();
 }
 
 function oppdaterStatus() {
