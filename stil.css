@@ -4,10 +4,13 @@ body {
   text-align: center;
   margin: 0;
   padding: 0;
+  position: relative;
+  min-height: 100vh;
 }
 
 #spill-container {
   padding-top: 20px;
+  padding-bottom: 60px; /* plass til teksten nederst */
 }
 
 #spill {
@@ -107,7 +110,7 @@ button:hover {
   position: absolute;
   top: 35px;
   left: 0;
-  transform: scaleX(1); /* peker mot høyre */
+  transform: scaleX(1);
   transition: left 0.5s ease-out;
   font-size: 30px;
 }
@@ -119,4 +122,17 @@ button:hover {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+
+/* 💙 Tekst nederst på siden */
+#footer-tekst {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-weight: bold;
+  color: #004d80;
+  font-size: 18px;
+  background: none;
 }
